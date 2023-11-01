@@ -2,23 +2,26 @@
 #include <WiFiNINA.h>
 #include <ThingSpeak.h>  // ThingSpeak library
 
+// DHT sensor configuration
 #define DHTPIN 2       // Pin connected to DHT11 data pin
 #define DHTTYPE DHT11  // Type of DHT sensor
 
+// WiFi credentials
 char ssid[] = "DEEPAK";     // WiFi SSID
-char pass[] = "12345679"; // WiFi Password
+char pass[] = "12345679";   // WiFi Password
 
-unsigned long channelID = 2250573;     // ThingSpeak Channel ID
-const char *apiKey = "5UAEKCJZ05G6R3LU";  //  ThingSpeak API Key
+// ThingSpeak configuration
+unsigned long channelID = 2250573;           // ThingSpeak Channel ID
+const char *apiKey = "5UAEKCJZ05G6R3LU";     // ThingSpeak API Key
 
 DHT dht(DHTPIN, DHTTYPE);
 WiFiClient client;
 
 void setup()
 {
-  Serial.begin(9600); // Initialize serial communication
-  dht.begin(); // Initialize DHT sensor
-  connectWiFi(); // Connect to WiFi
+  Serial.begin(9600);     // Initialize serial communication
+  dht.begin();            // Initialize DHT sensor
+  connectWiFi();          // Connect to WiFi
   ThingSpeak.begin(client); // Initialize ThingSpeak
 }
 
@@ -61,4 +64,4 @@ void sendDataToThingSpeak(float temp, float humidity)
   } else {
     Serial.println("Error sending data to ThingSpeak");
   }
-}      
+}
